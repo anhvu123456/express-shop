@@ -1,8 +1,16 @@
+require('dotenv').config();
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var csurf = require('csurf');
 var mongoose = require('mongoose');
+
+
+mongoose.connect('mongodb://localhost/express-demo', { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+    if (err) throw err;
+    console.log('Connect successfullyy!!');
+});
 
 
 var authRoute = require('./routes/auth.route');
@@ -16,7 +24,7 @@ app.set('views', './views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
-
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(express.static('public'));
 
 //Routes
