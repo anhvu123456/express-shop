@@ -1,4 +1,4 @@
-const e = require('express');
+
 var express = require('express');
 var controller = require('../controllers/product.controller');
 

@@ -1,13 +1,12 @@
-var low = require('lowdb');
-var FileSync = require('lowdb/adapters/FileSync');
-var adapter = new FileSync('db.json');
+var path = require('path');
+var  { Low, JSONFile } = require('lowdb');
 
-db = low(adapter);
+// Use JSON file for storage
+const file = join(__dirname, 'db.json')
+const adapter = new JSONFile(file)
+const db = new Low(adapter)
 
-db.defaults({
-    users: [],
-    sessions: [],
-    transfers: []
-}).write();
+db.data = { sessions: [] };
+ db.write();
 
 module.exports = db;

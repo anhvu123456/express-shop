@@ -16,6 +16,7 @@ mongoose.connect('mongodb://localhost/express-demo', { useNewUrlParser: true, us
 var authRoute = require('./routes/auth.route');
 var userRoute = require('./routes/user.route');
 var productRoute = require('./routes/product.route');
+var cartRoute = require('./routes/cart.route');
 
 var authMiddleware = require('./middlewares/auth.middleware');
 
@@ -41,6 +42,7 @@ app.get('/', function(req, res) {
 app.use('/users', authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
 app.use('/products', productRoute);
+app.use('/cart', cartRoute);
 
 app.listen(port, function(){
     console.log('Server listening on port ' + port)
