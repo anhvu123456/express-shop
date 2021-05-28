@@ -17,6 +17,7 @@ var authRoute = require('./routes/auth.route');
 var userRoute = require('./routes/user.route');
 var productRoute = require('./routes/product.route');
 var cartRoute = require('./routes/cart.route');
+var transfeRoute = require('./routes/transfer.route');
 
 var authMiddleware = require('./middlewares/auth.middleware');
 
@@ -32,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(express.static('public'));
 
+
 //Routes
 app.get('/', function(req, res) {
     res.render('index', {
@@ -43,6 +45,7 @@ app.use('/users', authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
 app.use('/products', productRoute);
 app.use('/cart', cartRoute);
+app.use('/transfer', authMiddleware.requireAuth, transfeRoute);
 
 app.listen(port, function(){
     console.log('Server listening on port ' + port)
